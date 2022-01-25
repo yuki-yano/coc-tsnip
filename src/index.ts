@@ -22,7 +22,13 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
       return;
     }
 
+    await workspace.nvim.call('feedkeys', ['', 'nit']);
+    if (await workspace.nvim.call('mode') !== 'i') {
+      return;
+    }
+
     await workspace.nvim.call('tsnip#remove_suffix_word', [item.word]);
+    await workspace.nvim.command('redraw');
     await workspace.nvim.command(`TSnip ${item.word}`);
   });
 };
