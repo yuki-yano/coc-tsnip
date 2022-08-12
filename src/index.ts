@@ -23,7 +23,7 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
     }
 
     await workspace.nvim.call('feedkeys', ['', 'nit']);
-    if (await workspace.nvim.call('mode') !== 'i') {
+    if ((await workspace.nvim.call('mode')) !== 'i') {
       return;
     }
 
