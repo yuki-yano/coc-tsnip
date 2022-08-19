@@ -1,9 +1,11 @@
 import { CompleteResult, events, ExtensionContext, sources, VimCompleteItem, workspace } from 'coc.nvim';
 
+const sourceName = 'tsnip';
+
 export const activate = async (context: ExtensionContext): Promise<void> => {
   context.subscriptions.push(
     sources.createSource({
-      name: 'tsnip source',
+      name: sourceName,
       doComplete: async (option) => {
         if (option.input === '') {
           return {
@@ -18,7 +20,7 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
   );
 
   events.on('CompleteDone', async (item: VimCompleteItem) => {
-    if (item.menu !== '[tsnip]') {
+    if (item.source !== sourceName) {
       return;
     }
 
@@ -41,7 +43,6 @@ const getCompletionItems = async (): Promise<CompleteResult> => {
       return {
         word,
         info,
-        menu: '[tsnip]',
         dup: 1,
       };
     }),
