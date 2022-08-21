@@ -6,6 +6,7 @@ export const activate = async (context: ExtensionContext): Promise<void> => {
   context.subscriptions.push(
     sources.createSource({
       name: sourceName,
+      shortcut: 'tsnip',
       doComplete: async (option) => {
         if (option.input === '') {
           return {
