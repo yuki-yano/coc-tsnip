@@ -41,6 +41,7 @@ const getCompletionItems = async (): Promise<CompleteResult> => {
   return {
     items: snippets.map(({ word, info }) => {
       return {
+        kind: ' ',
         word,
         info,
         dup: 1,
